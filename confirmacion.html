@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Confirmación de Reserva — Calidad de Vida | Bateas DHO</title>
+<meta name="description" content="Tu cita del Programa de Calidad de Vida ha sido reservada con éxito. Descarga tu comprobante."/>
+<link rel="icon" type="image/png" href="assets/img/logo-bateas.png"/>
+<link rel="apple-touch-icon" href="assets/img/logo-bateas.png"/>
+<meta name="theme-color" content="#006495"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#f2f4f8",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed-dim": "#c5c6ca",
+                    "error": "#ba1a1a",
+                    "secondary-fixed": "#e2e2e6",
+                    "on-secondary-fixed": "#191c1f",
+                    "on-primary": "#ffffff",
+                    "surface-bright": "#f8f9fe",
+                    "tertiary-container": "#c88d34",
+                    "on-background": "#191c1f",
+                    "outline": "#707880",
+                    "surface-container": "#eceef2",
+                    "on-tertiary-fixed": "#291800",
+                    "surface-variant": "#e0e2e7",
+                    "tertiary": "#835500",
+                    "inverse-surface": "#2d3134",
+                    "inverse-on-surface": "#eff1f5",
+                    "surface-container-high": "#e6e8ed",
+                    "secondary": "#5d5e62",
+                    "tertiary-fixed": "#ffddb4",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-container": "#616366",
+                    "surface": "#f8f9fe",
+                    "primary-container": "#589fd3",
+                    "on-surface": "#191c1f",
+                    "inverse-primary": "#8fcdff",
+                    "on-tertiary-container": "#462b00",
+                    "background": "#f8f9fe",
+                    "secondary-container": "#dfdfe3",
+                    "surface-dim": "#d8dade",
+                    "surface-tint": "#006495",
+                    "on-primary-fixed": "#001e30",
+                    "on-secondary-fixed-variant": "#45474a",
+                    "on-tertiary-fixed-variant": "#633f00",
+                    "outline-variant": "#c0c7d0",
+                    "surface-container-highest": "#e0e2e7",
+                    "on-error": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "primary-fixed-dim": "#8fcdff",
+                    "on-primary-fixed-variant": "#004b71",
+                    "primary": "#006495",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#fcba5d",
+                    "on-surface-variant": "#40484f",
+                    "primary-fixed": "#cbe6ff",
+                    "on-primary-container": "#003450",
+                    "on-tertiary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "unit": "8px",
+                    "section-gap": "80px",
+                    "container-max": "1200px",
+                    "margin-desktop": "64px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Manrope"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-sm": ["Manrope"],
+                    "headline-lg": ["Manrope"],
+                    "label-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["28px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-sm": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .step-active { font-variation-settings: 'FILL' 1; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(175, 176, 180, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md shadow-sm">
+<div class="flex justify-between items-center h-20 px-margin-desktop max-w-container-max mx-auto">
+<div class="flex items-center gap-3">
+  <div class="flex items-center gap-2">
+    <img src="assets/img/logo-bateas.png" alt="Bateas" class="h-8 w-auto" />
+    <img src="assets/img/logo_dho.png" alt="DHO" class="h-8 w-auto" />
+  </div>
+  <div class="w-px h-6 bg-outline-variant"></div>
+  <span class="font-label-md text-label-md text-primary tracking-tight">Programa de Calidad de Vida</span>
+</div>
+<a href="inscripcion.html" class="hidden md:inline-flex items-center gap-1 font-label-md text-label-md text-secondary hover:text-primary transition-colors">
+  <span class="material-symbols-outlined text-[18px]">add_circle</span>
+  Nueva Reserva
+</a>
+<button onclick="location.href='login.html'" class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-md text-label-md hover:bg-primary/90 transition-all duration-300 cursor-pointer active:scale-95">
+  Iniciar Sesión
+</button>
+</div>
+</header>
+<main class="pt-32 pb-section-gap px-margin-mobile md:px-margin-desktop max-w-[800px] mx-auto">
+<!-- Progress Bar -->
+<div class="mb-12">
+<div class="flex justify-between items-center mb-4">
+<span class="text-primary font-headline-sm text-headline-sm">Paso 3 de 3</span>
+<span class="text-secondary font-label-md text-label-md">Confirmación Final</span>
+</div>
+<div class="h-2 w-full bg-secondary-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-full rounded-full"></div>
+</div>
+</div>
+<!-- Success Header -->
+<div class="text-center mb-12">
+<div class="inline-flex items-center justify-center w-20 h-20 bg-primary/10 text-primary rounded-full mb-6">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'wght' 600;">check_circle</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Cita Reservada con Éxito</h1>
+<p class="font-body-lg text-body-lg text-secondary">Tu camino hacia el bienestar ha comenzado. Hemos recibido tu solicitud correctamente.</p>
+</div>
+<!-- Receipt Details (Asymmetric Bento-ish Card) -->
+<div id="recibo-card" class="glass-card rounded-xl p-8 md:p-10 shadow-sm relative overflow-hidden">
+<!-- Decorative Accent -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-full -mr-10 -mt-10"></div>
+<div class="flex items-center justify-between border-b border-outline-variant/30 pb-6 mb-8">
+<div>
+<p class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-1">Acuse de Recibo</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Referencia: <span id="conf-referencia">#CV-000000</span></p>
+</div>
+<div class="text-right">
+<p class="font-headline-sm text-headline-sm text-primary">Confirmada</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12">
+<!-- Service Info -->
+<div class="space-y-1">
+<p class="font-label-md text-label-md text-secondary">Servicio</p>
+<p class="font-headline-sm text-headline-sm text-on-surface">Nutrición - Calidad de Vida</p>
+</div>
+<!-- Client Info -->
+<div class="space-y-1">
+<p class="font-label-md text-label-md text-secondary">Paciente</p>
+<p class="font-body-lg text-body-lg text-on-surface" id="conf-nombre">—</p>
+</div>
+<!-- Date/Time Card Inside -->
+<div class="col-span-full bg-surface-container-low rounded-lg p-6 flex flex-col md:flex-row gap-6 md:items-center">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined">calendar_today</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-secondary">Fecha</p>
+<p class="font-body-md text-body-md font-semibold" id="conf-fecha">—</p>
+</div>
+</div>
+<div class="hidden md:block w-px h-10 bg-outline-variant/50"></div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-secondary">Hora</p>
+<p class="font-body-md text-body-md font-semibold" id="conf-hora">—</p>
+</div>
+</div>
+</div>
+<!-- Location/Access -->
+<div class="col-span-full space-y-1">
+<p class="font-label-md text-label-md text-secondary">Instrucciones</p>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">La atención se realizara en el Club del Empleado.</p>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="mt-10 flex flex-col md:flex-row gap-gutter">
+<button id="btn-descargar" class="flex-1 flex items-center justify-center gap-2 bg-primary text-on-primary py-4 px-8 rounded-xl font-body-md font-semibold shadow-md hover:shadow-lg transition-all active:scale-95 duration-200">
+  <span class="material-symbols-outlined">download</span>
+  Descargar Comprobante
+</button>
+<button onclick="location.href='inscripcion.html'" class="flex-1 flex items-center justify-center gap-2 bg-white border border-outline-variant/50 text-secondary py-4 px-8 rounded-xl font-body-md font-semibold hover:bg-surface-container-low transition-all active:scale-95 duration-200">
+  <span class="material-symbols-outlined">add_circle</span>
+  Nueva Reserva
+</button>
+</div>
+
+</main>
+<!-- Footer -->
+<footer class="w-full py-8 bg-surface-container-low border-t border-outline-variant/30">
+<div class="flex flex-col items-center gap-4 px-margin-desktop max-w-container-max mx-auto">
+   <p class="font-body-md text-body-md text-secondary text-center">&copy; 2026 Calidad de Vida &mdash; Direcci&oacute;n de Desarrollo Humano y Organizacional. Todos los derechos reservados.</p>
+</div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="assets/js/firebase-init.js"></script>
+<script>
+  const db = firebase.firestore();
+
+  const reservaId = sessionStorage.getItem('reservaId');
+  const clienteId = sessionStorage.getItem('clienteId');
+
+  if (!reservaId || !clienteId) {
+    window.location.href = 'inscripcion.html';
+  } else {
+    document.getElementById('conf-referencia').textContent = '#CV-' + reservaId.slice(-6).toUpperCase();
+    document.getElementById('conf-fecha').textContent = sessionStorage.getItem('reservaFecha') || '—';
+    document.getElementById('conf-hora').textContent  = sessionStorage.getItem('reservaHora')  || '—';
+
+    db.collection('clientes').doc(clienteId).get().then(doc => {
+      if (doc.exists) document.getElementById('conf-nombre').textContent = doc.data().nombre;
+    });
+  }
+
+  document.getElementById('btn-descargar').addEventListener('click', async function() {
+    const card = document.getElementById('recibo-card');
+    const btn  = this;
+    btn.disabled = true;
+    btn.innerHTML = '<span class="material-symbols-outlined">hourglass_top</span> Generando...';
+
+    const canvas = await html2canvas(card, {
+      backgroundColor: '#ffffff',
+      scale: 2,
+      useCORS: true,
+      logging: false
+    });
+
+    const link    = document.createElement('a');
+    const ref     = document.getElementById('conf-referencia').textContent.replace('#','');
+    link.download = 'comprobante-' + ref + '.png';
+    link.href     = canvas.toDataURL('image/png');
+    link.click();
+
+    btn.disabled = false;
+    btn.innerHTML = '<span class="material-symbols-outlined">download</span> Descargar Comprobante';
+  });
+</script>
+</body></html>

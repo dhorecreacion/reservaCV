@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Gestión de Reservas — Calidad de Vida | Bateas DHO</title>
+<meta name="description" content="Panel de administración de reservas del Programa de Calidad de Vida — Dirección de Desarrollo Humano y Organizacional de Bateas."/>
+<link rel="icon" type="image/png" href="assets/img/logo-bateas.png"/>
+<link rel="apple-touch-icon" href="assets/img/logo-bateas.png"/>
+<meta name="theme-color" content="#006495"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#f2f4f8",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed-dim": "#c5c6ca",
+                    "error": "#ba1a1a",
+                    "secondary-fixed": "#e2e2e6",
+                    "on-secondary-fixed": "#191c1f",
+                    "on-primary": "#ffffff",
+                    "surface-bright": "#f8f9fe",
+                    "tertiary-container": "#c88d34",
+                    "on-background": "#191c1f",
+                    "outline": "#707880",
+                    "surface-container": "#eceef2",
+                    "on-tertiary-fixed": "#291800",
+                    "surface-variant": "#e0e2e7",
+                    "tertiary": "#835500",
+                    "inverse-surface": "#2d3134",
+                    "inverse-on-surface": "#eff1f5",
+                    "surface-container-high": "#e6e8ed",
+                    "secondary": "#5d5e62",
+                    "tertiary-fixed": "#ffddb4",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-container": "#616366",
+                    "surface": "#f8f9fe",
+                    "primary-container": "#589fd3",
+                    "on-surface": "#191c1f",
+                    "inverse-primary": "#8fcdff",
+                    "on-tertiary-container": "#462b00",
+                    "background": "#f8f9fe",
+                    "secondary-container": "#dfdfe3",
+                    "surface-dim": "#d8dade",
+                    "surface-tint": "#006495",
+                    "on-primary-fixed": "#001e30",
+                    "on-secondary-fixed-variant": "#45474a",
+                    "on-tertiary-fixed-variant": "#633f00",
+                    "outline-variant": "#c0c7d0",
+                    "surface-container-highest": "#e0e2e7",
+                    "on-error": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "primary-fixed-dim": "#8fcdff",
+                    "on-primary-fixed-variant": "#004b71",
+                    "primary": "#006495",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#fcba5d",
+                    "on-surface-variant": "#40484f",
+                    "primary-fixed": "#cbe6ff",
+                    "on-primary-container": "#003450",
+                    "on-tertiary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "unit": "8px",
+                    "section-gap": "80px",
+                    "container-max": "1200px",
+                    "margin-desktop": "64px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Manrope"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-sm": ["Manrope"],
+                    "headline-lg": ["Manrope"],
+                    "label-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["28px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-sm": ["22px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        background-color: #f8f9fe;
+        color: #191c1f;
+      }
+    </style>
+</head>
+<body class="font-body-md text-body-md selection:bg-primary-container selection:text-on-primary-container" style="display:none">
+
+<!-- Pantalla de carga (visible mientras Firebase verifica sesión) -->
+<div id="auth-loader" class="fixed inset-0 z-[300] bg-background flex flex-col items-center justify-center gap-4">
+  <div class="flex items-center gap-2 mb-2">
+    <img src="assets/img/logo-bateas.png" alt="Bateas" class="h-9 w-auto" />
+    <img src="assets/img/logo_dho.png" alt="DHO" class="h-9 w-auto" />
+  </div>
+  <span class="material-symbols-outlined text-primary text-4xl animate-spin">progress_activity</span>
+  <p class="font-label-md text-label-md text-secondary">Verificando sesión...</p>
+</div>
+
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md shadow-sm">
+<div class="flex justify-between items-center h-20 px-margin-desktop max-w-container-max mx-auto">
+<div class="flex items-center gap-3">
+  <div class="flex items-center gap-2">
+    <img src="assets/img/logo-bateas.png" alt="Bateas" class="h-8 w-auto" />
+    <img src="assets/img/logo_dho.png" alt="DHO" class="h-8 w-auto" />
+  </div>
+  <div class="w-px h-6 bg-outline-variant"></div>
+  <span class="font-label-md text-label-md text-primary tracking-tight">Programa de Calidad de Vida</span>
+</div>
+<a href="inscripcion.html" class="hidden md:inline-flex items-center gap-1 font-label-md text-label-md text-secondary hover:text-primary transition-colors">
+  <span class="material-symbols-outlined text-[18px]">add_circle</span>
+  Nueva Reserva
+</a>
+<button id="btn-logout" class="flex items-center gap-2 text-secondary hover:text-error font-label-md text-label-md transition-colors cursor-pointer active:scale-95" title="Cerrar sesión">
+  <span class="material-symbols-outlined">logout</span>
+  Cerrar sesión
+</button>
+</div>
+</header>
+<main class="pt-32 pb-section-gap px-margin-desktop max-w-container-max mx-auto">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Gestión de Reservas</h1>
+<p class="text-on-surface-variant font-body-lg max-w-2xl">Administre las sesiones de terapia y consultas de bienestar de sus clientes con precisión y claridad.</p>
+</div>
+<div class="flex gap-4">
+<button class="bg-primary text-on-primary px-6 py-3 rounded-xl flex items-center gap-2 font-label-md shadow-md hover:brightness-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined">add</span>
+                    Nueva Cita
+                </button>
+</div>
+</div>
+<!-- Dashboard Statistics (Asymmetric Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-12">
+<div class="md:col-span-2 bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/20 shadow-sm flex flex-col justify-between min-h-[160px]">
+<div class="flex justify-between items-start">
+<span class="text-secondary font-label-md">Total Reservas Hoy</span>
+<span class="material-symbols-outlined text-primary">calendar_today</span>
+</div>
+<div>
+<div class="text-headline-lg font-headline-lg text-on-surface">12</div>
+<div class="text-primary font-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+                        +15% vs ayer
+                    </div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/20 shadow-sm flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<span class="text-secondary font-label-md">Confirmadas</span>
+<span class="material-symbols-outlined text-tertiary">check_circle</span>
+</div>
+<div class="text-headline-md font-headline-md text-on-surface">48</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/20 shadow-sm flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<span class="text-secondary font-label-md">Pendientes</span>
+<span class="material-symbols-outlined text-secondary">pending_actions</span>
+</div>
+<div class="text-headline-md font-headline-md text-on-surface">03</div>
+</div>
+</div>
+<!-- Filters & Search -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/20 shadow-sm mb-6 p-4">
+<div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+<div class="relative w-full md:w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-primary-container text-body-md" placeholder="Buscar por nombre o ID..." type="text"/>
+</div>
+<div class="flex gap-2 w-full md:w-auto">
+<button class="flex-1 md:flex-none px-4 py-2.5 bg-surface-container-low text-on-surface-variant rounded-lg font-label-md flex items-center justify-center gap-2 hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+                        Filtros
+                    </button>
+<button class="flex-1 md:flex-none px-4 py-2.5 bg-surface-container-low text-on-surface-variant rounded-lg font-label-md flex items-center justify-center gap-2 hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">event</span>
+                        Fecha
+                    </button>
+</div>
+</div>
+</div>
+<!-- Appointments Table -->
+<div class="bg-white rounded-xl border border-outline-variant/20 shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant/30">
+<th class="px-6 py-4 font-label-md text-secondary uppercase tracking-wider">Cliente</th>
+<th class="px-6 py-4 font-label-md text-secondary uppercase tracking-wider">ID Reserva</th>
+<th class="px-6 py-4 font-label-md text-secondary uppercase tracking-wider">Fecha</th>
+<th class="px-6 py-4 font-label-md text-secondary uppercase tracking-wider">Hora</th>
+<th class="px-6 py-4 font-label-md text-secondary uppercase tracking-wider">Estado</th>
+<th class="px-6 py-4 font-label-md text-secondary uppercase tracking-wider">Asistencia</th>
+<th class="px-6 py-4 font-label-md text-secondary uppercase tracking-wider min-w-[200px]">Notas</th>
+</tr>
+</thead>
+<tbody id="tabla-reservas" class="divide-y divide-outline-variant/10">
+<tr id="fila-vacia">
+<td colspan="7" class="px-6 py-16 text-center text-secondary font-body-md">
+  <span class="material-symbols-outlined text-4xl block mb-3 text-outline-variant">event_busy</span>
+  No hay reservas registradas aún.
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 flex items-center justify-between border-t border-outline-variant/30 bg-surface-container-lowest">
+<span class="text-label-md text-secondary">Sin citas registradas</span>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-outline-variant text-secondary hover:bg-surface-container transition-colors disabled:opacity-50">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center bg-primary text-on-primary">1</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-outline-variant text-secondary hover:bg-surface-container transition-colors">2</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-outline-variant text-secondary hover:bg-surface-container transition-colors">3</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-outline-variant text-secondary hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-8 bg-surface-container-low border-t border-outline-variant/30">
+<div class="flex flex-col items-center gap-4 px-margin-desktop max-w-container-max mx-auto">
+
+  <p class="font-body-md text-body-md text-secondary text-center">&copy; 2026 Calidad de Vida &mdash; Direcci&oacute;n de Desarrollo Humano y Organizacional. Todos los derechos reservados.</p>
+</div>
+</footer>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="assets/js/firebase-init.js"></script>
+<script>
+  const db   = firebase.firestore();
+  const auth = firebase.auth();
+
+  let unsubscribe = null;
+
+  // Auth state — se ejecuta una sola vez al cargar
+  auth.onAuthStateChanged(user => {
+    document.getElementById('auth-loader').style.display = 'none';
+    if (user) {
+      document.body.style.display = '';
+      cargarReservas();
+    } else {
+      window.location.replace('login.html');
+    }
+  });
+
+  // Logout
+  document.getElementById('btn-logout').addEventListener('click', () => auth.signOut());
+
+  // Cargar reservas en tiempo real
+  function cargarReservas() {
+    const tbody    = document.getElementById('tabla-reservas');
+    const countEl  = document.querySelector('.text-label-md.text-secondary');
+    unsubscribe = db.collection('reservas').orderBy('creadoEn', 'desc').onSnapshot(snapshot => {
+      tbody.innerHTML = '';
+      if (snapshot.empty) {
+        tbody.innerHTML = `<tr><td colspan="7" class="px-6 py-16 text-center text-secondary font-body-md">
+          <span class="material-symbols-outlined text-4xl block mb-3 text-outline-variant">event_busy</span>
+          No hay reservas registradas aún.</td></tr>`;
+        if (countEl) countEl.textContent = 'Sin citas registradas';
+        return;
+      }
+      snapshot.forEach(doc => {
+        const d  = doc.data();
+        const id = doc.id;
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-surface-container-lowest transition-colors';
+        tr.innerHTML = `
+          <td class="px-6 py-5">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold font-label-md">
+                ${(d.nombre || '?').charAt(0).toUpperCase()}
+              </div>
+              <div>
+                <div class="font-body-md text-on-surface font-semibold">${d.nombre || '—'}</div>
+                <div class="text-[12px] text-secondary">${d.email || ''}</div>
+              </div>
+            </div>
+          </td>
+          <td class="px-6 py-5 font-body-md text-on-surface-variant">#CV-${id.slice(-6).toUpperCase()}</td>
+          <td class="px-6 py-5 font-body-md text-on-surface">${d.fecha || '—'}</td>
+          <td class="px-6 py-5 font-body-md text-on-surface">${d.hora || '—'}</td>
+          <td class="px-6 py-5">
+            <span class="px-3 py-1 rounded-full bg-primary-container/10 text-primary font-label-md inline-flex items-center gap-1">
+              <span class="material-symbols-outlined text-[14px]" style="font-variation-settings:'FILL' 1;">check_circle</span>
+              Confirmado
+            </span>
+          </td>
+          <td class="px-6 py-5">
+            <select id="sel-${id}" onchange="guardarCampo('${id}','asistencia',this.value)"
+              class="text-label-md font-label-md rounded-lg px-3 py-2 border border-outline-variant/40 bg-surface-container-low focus:outline-none focus:ring-2 focus:ring-primary-container cursor-pointer transition-all">
+              <option value="pendiente"  ${(!d.asistencia || d.asistencia==='pendiente')  ? 'selected':''}>— Pendiente</option>
+              <option value="atendido"   ${d.asistencia==='atendido'   ? 'selected':''}>✓ Atendido</option>
+              <option value="no-asistio" ${d.asistencia==='no-asistio' ? 'selected':''}>✗ No se presentó</option>
+            </select>
+          </td>
+          <td class="px-6 py-5">
+            <input type="text" value="${d.notas || ''}" placeholder="Agregar nota..."
+              onchange="guardarCampo('${id}','notas',this.value)"
+              class="w-full text-body-md font-body-md bg-transparent border-b border-outline-variant/40 focus:border-primary focus:outline-none py-1 text-on-surface placeholder:text-outline-variant transition-colors min-w-[160px]" />
+          </td>
+        `;
+        tbody.appendChild(tr);
+        colorSelect(id, d.asistencia);
+      });
+      if (countEl) countEl.textContent = `Mostrando ${snapshot.size} cita${snapshot.size !== 1 ? 's' : ''}`;
+    });
+  }
+
+  function guardarCampo(id, campo, valor) {
+    db.collection('reservas').doc(id).update({ [campo]: valor });
+    if (campo === 'asistencia') colorSelect(id, valor);
+  }
+
+  function colorSelect(id, valor) {
+    const sel = document.getElementById('sel-' + id);
+    if (!sel) return;
+    if (valor === 'atendido') {
+      sel.style.cssText = 'background:rgba(255,221,180,.35);color:#835500;border-color:rgba(131,85,0,.3)';
+    } else if (valor === 'no-asistio') {
+      sel.style.cssText = 'background:rgba(255,218,214,.35);color:#ba1a1a;border-color:rgba(186,26,26,.3)';
+    } else {
+      sel.style.cssText = '';
+    }
+  }
+</script>
+</body></html>
