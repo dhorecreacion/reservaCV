@@ -256,7 +256,8 @@
     const diasEnMes   = new Date(calAnio, calMes + 1, 0).getDate();
     const hoyDate     = new Date();
     hoyDate.setHours(0,0,0,0);
-    const fechaMinima = new Date(2026, 4, 12); // 12 de mayo 2026 (mes 4 = mayo)
+    const fechaMinima = new Date(2026, 4, 12); // 12 de mayo 2026
+    const fechaMaxima = new Date(2026, 4, 14); // 14 de mayo 2026
 
     // Celdas vacías antes del día 1
     for (let i = 0; i < primerDia; i++) {
@@ -267,7 +268,7 @@
 
     for (let d = 1; d <= diasEnMes; d++) {
       const fecha   = new Date(calAnio, calMes, d);
-      const pasado  = fecha < fechaMinima;
+      const pasado  = fecha < fechaMinima || fecha > fechaMaxima;
       const esHoy   = fecha.getTime() === fechaMinima.getTime();
       const selec   = selectedDia === d && calMes === new Date().getMonth() || false;
 
